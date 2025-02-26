@@ -6,12 +6,12 @@ services:
       context: ../
       dockerfile: docker/Dockerfile.build
       network: host
-      no_cache: true
+      # no_cache: true
     image: build
     restart: always
-    # network_mode: host
-    ports:
-      - "3000:3000"
+    network_mode: host
+    # ports:
+      # - "3000:3000"
     # volumes: 
     #   - type: bind
     #     source: ./data

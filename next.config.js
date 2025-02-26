@@ -37,7 +37,7 @@ if(process.env.STANDALONE){
   nextConfig.experimental = {
     esmExternals: 'loose'
   };
-  nextConfig.output = standalone;
+  nextConfig.output = 'standalone';
 }
 
 module.exports = composePlugins([withBundleAnalyzer], nextConfig);
