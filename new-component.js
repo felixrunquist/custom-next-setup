@@ -60,10 +60,10 @@ fs.writeFileSync(
     `import styles from './${folderName}.module.scss';
 import { useEffect, useState, useRef } from 'react'
 
-export default function ${componentName}(props){
+export default function ${componentName}({...props}){
     return (
-      <>
-      </>
+        <>
+        </>
     )
 }
 `,
