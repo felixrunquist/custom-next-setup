@@ -1,34 +1,91 @@
 $monospace: "Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, "Lucida Console", monospace;
 
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-xxl: 1535px;
+
 @mixin bp($point) {
   @if $point == sm {
-    @media (min-width: 640px) { @content ; }
+    @media (min-width: $bp-sm) { @content ; }
   }
   @else if $point == sm-u {
-    @media (max-width: 639px) { @content ; }
+    @media (max-width: calc($bp-sm - 1px)) { @content ; }
   }
   @else if $point == md {
-    @media (min-width: 768px) { @content ; }
+    @media (min-width: $bp-md) { @content ; }
   }
   @else if $point == md-u {
-    @media (max-width: 767px) { @content ; }
+    @media (max-width: calc($bp-md - 1px)) { @content ; }
   }
   @else if $point == lg {
-    @media (min-width: 1024px) { @content ; }
+    @media (min-width: $bp-lg) { @content ; }
   }
   @else if $point == lg-u {
-    @media (max-width: 1023px) { @content ; }
+    @media (max-width: calc($bp-lg - 1px)) { @content ; }
   }
   @else if $point == xl {
-    @media (min-width: 1280px) { @content ; }
+    @media (min-width: $bp-xl) { @content ; }
   }
   @else if $point == xl-u {
-    @media (max-width: 1279px) { @content ; }
+    @media (max-width: calc($bp-xl - 1px)) { @content ; }
   }
   @else if $point == xxl {
-    @media (min-width: 1536px) { @content ; }
+    @media (min-width: $bp-xxl) { @content ; }
   }
   @else if $point == xxl-u {
-    @media (max-width: 1535px) { @content ; }
+    @media (max-width: calc($bp-xxl - 1px)) { @content ; }
   }
+}
+
+@mixin dark {
+  @media (prefers-color-scheme: dark) { @content ; }
+}
+
+
+// .width-bp - size an element to the width of a breakpoint
+// .padding-bp - pad an element to the inner width of a breakpoint
+.width-bp {width: 100%; }
+// .padding-bp {background: red; }
+@include bp(sm){
+  .width-bp {width: $bp-sm; }
+  .padding-bp {padding-left: calc((100% - $bp-sm) / 2); padding-right: calc((100% - $bp-sm) / 2);}
+}
+@include bp(md){
+  .width-bp {width: $bp-md; }
+  .padding-bp {padding-left: calc((100% - $bp-md) / 2); padding-right: calc((100% - $bp-md) / 2);}
+}
+@include bp(lg){
+  .width-bp {width: $bp-lg; }
+  .padding-bp {padding-left: calc((100% - $bp-lg) / 2); padding-right: calc((100% - $bp-lg) / 2);}
+}
+@include bp(xl){
+  .width-bp {width: $bp-xl; }
+  .padding-bp {padding-left: calc((100% - $bp-xl) / 2); padding-right: calc((100% - $bp-xl) / 2);}
+}
+@include bp(xxl){
+  .width-bp {width: $bp-xxl; }
+  .padding-bp {padding-left: calc((100% - $bp-xxl) / 2); padding-right: calc((100% - $bp-xxl) / 2);}
+}
+
+// .sm-uh - hide if the viewport is smaller than sm
+@include bp(sm-u) {
+	.sm-uh {display: none !important; opacity: 0; }
+}
+// .md-uh - hide if the viewport is smaller than md
+@include bp(md-u) {
+	.md-uh {display: none !important; opacity: 0; }
+}
+// .md-h - hide if the viewport is larger than md
+@include bp(md) {
+	.md-h {display: none !important; opacity: 0; }
+}
+// .lg-h - hide if the viewport is larger than lg
+@include bp(lg) {
+	.lg-h {display: none !important; opacity: 0; }
+}
+
+@function lerp($x, $y, $a) {
+  @return calc($x * (1 - $a) + $y * $a)
 }
